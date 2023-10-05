@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="acra_toast_text">Sorry, the application has crashed</string>
+    <string name="notification_title">App Crash</string>
+    <string name="notification_text">Sorry, the application has crashed</string>
+    <string name="notification_channel">nanti dulu</string>
+    <string name="notification_channel_desc">nanti dulu</string>
+    <string name="notification_send">Ok</string>
+    <string name="notification_discard">Cancel</string>
+</resources>
