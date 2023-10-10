@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
+//    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -45,17 +45,17 @@ class HomeFragment : Fragment() {
 
         binding.gocrash.setOnClickListener {
 //            sleep1()
+            throw NullPointerException("hello nulol")
 //            stackOverflow2()
         }
         binding.sendError.setOnClickListener {
-            send_report()
-//            throw NullPointerException("hello nulol")
-//            try {
-//
-//            } catch (er: ConcurrentModificationException) {
-//                ACRA.errorReporter.handleException(er)
+//            send_report()
+            try {
+            throw ConcurrentModificationException("hello nulol")
+            } catch (er: ConcurrentModificationException) {
+                ACRA.errorReporter.handleException(er)
 //                Sentry.captureException(er)
-//            }
+            }
 
         }
 
@@ -73,11 +73,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun sleep1() {
-        try {
-            Thread.sleep((8 * 1000).toLong())
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+//        try {
+//            Thread.sleep((8 * 1000).toLong())
+//        } catch (e: InterruptedException) {
+//            e.printStackTrace()
+//        }
 //        val errorlist = arrayListOf<Error>(OutOfMemoryError("OutOfMemory"), ClassCircularityError("ClassCircularity"), IllegalAccessError("IllegalAccess"))
 //        val exceptionlist = arrayListOf<Exception>( RuntimeException("Runtime"),ArithmeticException("Arithmetic") , CharacterCodingException(),ClassCastException("ClassCast") ,ConcurrentModificationException("ConcurrentModification"))
 //        val exceptionlist = arrayListOf<Exception>(ConcurrentModificationException("ConcurrentModification"))
@@ -113,18 +113,18 @@ class HomeFragment : Fragment() {
 //            throw ArrayStoreException("ArrayStore")
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+//    @RequiresApi(Build.VERSION_CODES.O)
     private fun send_report(){
-        val start1 = LocalTime.now()
-        while (true) {
-            try {
-                throw IllegalAccessError("IllegalAccess")
-            } catch (er: IllegalAccessError) {
-//                Sentry.captureException(er)
-                ACRA.errorReporter.handleException(er)
-            }
-            if (ChronoUnit.SECONDS.between(start1, LocalDateTime.now()) >= 30) break
-        }
+//        val start1 = LocalTime.now()
+//        while (true) {
+//            try {
+//                throw IllegalAccessError("IllegalAccess")
+//            } catch (er: IllegalAccessError) {
+////                Sentry.captureException(er)
+//                ACRA.errorReporter.handleException(er)
+//            }
+//            if (ChronoUnit.SECONDS.between(start1, LocalDateTime.now()) >= 30) break
+//        }
 
 //        AcraActivity().trackBreadcrumb("in Dashboard now")
 //        ACRA.errorReporter.putCustomData("Event at ${System.currentTimeMillis()}", "Send Button Pressed")

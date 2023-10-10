@@ -31,16 +31,23 @@ class AcraActivity : Application() {
             buildConfigClass = BuildConfig::class.java
             reportFormat = StringFormat.JSON
             httpSender {
+//              "5.9.3"
                 uri = "http://10.61.41.84:8080/report"
-                basicAuthLogin = "oUkNOJevVIHcs8I5"
-                basicAuthPassword = "1dtEuSjhWCCDgfGu"
+//                uri = "http://p090mhp550606:8080/report"
+//                uri = "https://acrarium-crashreport-dev.apps.ocpdev.dti.co.id/report"
+                basicAuthLogin = "AKDDknjbH51pkMQC"
+                basicAuthPassword = "hGjVDIJkoUPJYWrh"
+
+//                5.8.4
+//                basicAuthLogin = "oUkNOJevVIHcs8I5"
+//                basicAuthPassword = "1dtEuSjhWCCDgfGu"
                 httpMethod = HttpSender.Method.POST
-                certificatePath = "asset://devapps.pem"
+//                certificatePath = "asset://devapps.pem"
                 connectionTimeout = 5000
                 socketTimeout = 20000
                 dropReportsOnTimeout = false
                 compress = false
-                tlsProtocols = arrayOf(TLS.V1_3, TLS.V1_2, TLS.V1_1, TLS.V1)
+//                tlsProtocols = arrayOf(TLS.V1_3, TLS.V1_2, TLS.V1_1, TLS.V1)
                 //---the following options allow you to configure a self signed certificate
                 //keyStoreFactoryClass = MyKeyStoreFactory::class.java
                 //certificatePath = "asset://mycert.cer"

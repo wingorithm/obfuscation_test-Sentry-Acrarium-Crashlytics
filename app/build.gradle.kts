@@ -1,16 +1,26 @@
+//import io.sentry.android.gradle.extensions.InstrumentationFeature
+
 plugins {
     id("com.android.application")
-    id("proguard")
     id("org.jetbrains.kotlin.android")
 //    id ("io.sentry.android.gradle") version "3.12.0"
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:\\Users\\U550606\\AndroidStudioProjects\\MyApplication2Key.jks")
+            storePassword = "password"
+            keyAlias = "key0"
+            keyPassword = "password"
+        }
+    }
     namespace = "com.example.myapplication2"
     compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.myapplication2"
+//        minSdk = 24
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -20,12 +30,10 @@ android {
     }
 
     buildTypes {
-        debug {
-            isMinifyEnabled = false
-//            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -39,6 +47,31 @@ android {
         viewBinding = true
     }
 }
+
+
+//sentry {
+//    includeProguardMapping.set(true)
+//    autoUploadProguardMapping.set(true)
+//    experimentalGuardsquareSupport.set(false)
+//    uploadNativeSymbols.set(false)
+//    autoUploadNativeSymbols.set(true)
+//    includeNativeSources.set(false)
+//    includeSourceContext.set(false)
+//    tracingInstrumentation {
+//        enabled.set(true)
+//        features.set(setOf(InstrumentationFeature.DATABASE, InstrumentationFeature.FILE_IO, InstrumentationFeature.OKHTTP, InstrumentationFeature.COMPOSE))
+//    }
+//    autoInstallation {
+//        enabled.set(true)
+//        sentryVersion.set("6.30.0")
+//    }
+//    includeDependenciesReport.set(true)
+//
+////    ignoredBuildTypes.set(setOf("release"))
+////    ignoredFlavors.set(setOf("production"))
+////    ignoredVariants.set(setOf("productionRelease"))
+//
+//}
 
 dependencies {
 
@@ -54,7 +87,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    val acraVersion = "5.8.4"
+    val acraVersion = "5.9.3"
     implementation("ch.acra:acra-core:$acraVersion")
     implementation("ch.acra:acra-http:$acraVersion")
     implementation("ch.acra:acra-notification:$acraVersion")
