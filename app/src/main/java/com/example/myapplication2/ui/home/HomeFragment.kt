@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication2.databinding.FragmentHomeBinding
-//import io.sentry.Sentry
+import io.sentry.Sentry
 import org.acra.ACRA
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -53,8 +53,9 @@ class HomeFragment : Fragment() {
             try {
             throw ConcurrentModificationException("hello nulol")
             } catch (er: ConcurrentModificationException) {
-                ACRA.errorReporter.handleException(er)
-//                Sentry.captureException(er)
+//                ACRA.errorReporter.handleException(er)
+                Sentry.captureException(er)
+                Log.i("ERRORNYA", er.toString(), er)
             }
 
         }

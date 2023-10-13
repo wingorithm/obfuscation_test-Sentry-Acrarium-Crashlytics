@@ -1,9 +1,10 @@
-//import io.sentry.android.gradle.extensions.InstrumentationFeature
+import io.sentry.android.gradle.extensions.InstrumentationFeature
+import io.sentry.android.gradle.instrumentation.logcat.LogcatLevel
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-//    id ("io.sentry.android.gradle") version "3.12.0"
+    id("io.sentry.android.gradle") version "3.12.0"
 }
 
 android {
@@ -32,7 +33,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
         }
     }
@@ -49,29 +50,33 @@ android {
 }
 
 
-//sentry {
-//    includeProguardMapping.set(true)
-//    autoUploadProguardMapping.set(true)
-//    experimentalGuardsquareSupport.set(false)
-//    uploadNativeSymbols.set(false)
-//    autoUploadNativeSymbols.set(true)
-//    includeNativeSources.set(false)
-//    includeSourceContext.set(false)
-//    tracingInstrumentation {
-//        enabled.set(true)
-//        features.set(setOf(InstrumentationFeature.DATABASE, InstrumentationFeature.FILE_IO, InstrumentationFeature.OKHTTP, InstrumentationFeature.COMPOSE))
-//    }
-//    autoInstallation {
-//        enabled.set(true)
-//        sentryVersion.set("6.30.0")
-//    }
-//    includeDependenciesReport.set(true)
-//
-////    ignoredBuildTypes.set(setOf("release"))
-////    ignoredFlavors.set(setOf("production"))
-////    ignoredVariants.set(setOf("productionRelease"))
-//
-//}
+sentry {
+    includeProguardMapping.set(true) //-> generate a UUID & uploading the mapping to Sentry
+    autoUploadProguardMapping.set(true) //-> auto-upload the mapping file to Sentry
+    experimentalGuardsquareSupport.set(false) // (tools integration)-> plugin will try to consume and upload the mapping file produced by Dexguard and External Proguard.
+    uploadNativeSymbols.set(false) //-> utomatic configuration of Native Symbols for Sentry
+    autoUploadNativeSymbols.set(true) //-> lanjutan diatas
+    includeNativeSources.set(false) // -> has an effect only when [uploadNativeSymbols] is enabled.
+    includeSourceContext.set(false) // -> Generates a JVM (Java, Kotlin, etc.) source bundle and uploads your source code to Sentry. This enables source context, allowing you to see your source
+    tracingInstrumentation {
+        enabled.set(true)
+        features.set(setOf(InstrumentationFeature.DATABASE, InstrumentationFeature.FILE_IO, InstrumentationFeature.OKHTTP, InstrumentationFeature.COMPOSE))
+        logcat {
+            enabled = true
+            minLevel = LogcatLevel.WARNING
+        }
+    }
+    autoInstallation {
+        enabled.set(true)
+        sentryVersion.set("6.31.0")
+    }
+    includeDependenciesReport.set(true)
+
+//    ignoredBuildTypes.set(setOf("release"))
+//    ignoredFlavors.set(setOf("production"))
+//    ignoredVariants.set(setOf("productionRelease"))
+
+}
 
 dependencies {
 
@@ -94,11 +99,11 @@ dependencies {
     implementation("ch.acra:acra-toast:$acraVersion")
 
     implementation("com.github.anrwatchdog:anrwatchdog:1.4.0")
-
     //-----For Sentry
+//    implementation("io.sentry:sentry-android-gradle-plugin:3.13.0")
 //    implementation("io.sentry:sentry-android-gradle-plugin:3.12.0") -> ini gak bisa karna io.sentry.Sentrynya gk kepanggil
 
-    // https://mvnrepository.com/artifact/com.guardsquare/proguard-gradle
-//    implementation("com.guardsquare:proguard-gradle:7.3.0")
+    //-----Proguard
+//    implementation("com.guardsquare:proguard-gradle:7.3.0") -> ini gak bisa sama aja gk dapet plluginnya
 }
 
