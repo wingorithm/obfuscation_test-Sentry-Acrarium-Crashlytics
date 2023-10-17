@@ -36,6 +36,10 @@ pluginManagement {
             isAllowInsecureProtocol  = true
             url = uri("http://bcaartifactory.intra.bca.co.id:8080/artifactory/jcenter.bintray.com/")
         }
+//        maven {
+//            isAllowInsecureProtocol  = true
+//            url = uri("http://bcaartifactory:8080/artifactory/list/maven.google.com/com/crashlytics/sdk/android/crashlytics/")
+//        }
     }
 }
 dependencyResolutionManagement {

@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication2.databinding.FragmentHomeBinding
-import io.sentry.Sentry
+//import io.sentry.Sentry
 import org.acra.ACRA
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -45,8 +45,10 @@ class HomeFragment : Fragment() {
 
         binding.gocrash.setOnClickListener {
 //            sleep1()
-            throw NullPointerException("hello nulol")
-//            stackOverflow2()
+//            throw NullPointerException("hello nulol")
+            stackOverflow2()
+//            Sentry.captureMessage("testing message")
+//            sleep1()
         }
         binding.sendError.setOnClickListener {
 //            send_report()
@@ -54,7 +56,7 @@ class HomeFragment : Fragment() {
             throw ConcurrentModificationException("hello nulol")
             } catch (er: ConcurrentModificationException) {
 //                ACRA.errorReporter.handleException(er)
-                Sentry.captureException(er)
+//                Sentry.captureException(er)
                 Log.i("ERRORNYA", er.toString(), er)
             }
 
@@ -74,11 +76,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun sleep1() {
-//        try {
-//            Thread.sleep((8 * 1000).toLong())
-//        } catch (e: InterruptedException) {
-//            e.printStackTrace()
-//        }
+        try {
+            Thread.sleep((8 * 1000).toLong())
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
 //        val errorlist = arrayListOf<Error>(OutOfMemoryError("OutOfMemory"), ClassCircularityError("ClassCircularity"), IllegalAccessError("IllegalAccess"))
 //        val exceptionlist = arrayListOf<Exception>( RuntimeException("Runtime"),ArithmeticException("Arithmetic") , CharacterCodingException(),ClassCastException("ClassCast") ,ConcurrentModificationException("ConcurrentModification"))
 //        val exceptionlist = arrayListOf<Exception>(ConcurrentModificationException("ConcurrentModification"))
