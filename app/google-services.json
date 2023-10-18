@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "720748488197",
+    "project_id": "bcacuy",
+    "storage_bucket": "bcacuy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720748488197:android:01447cbca809d2a2979e6c",
+        "android_client_info": {
+          "package_name": "com.example.myapplication2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr2V6XMQRP__rCTYveTjLx3C7KbigyK3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

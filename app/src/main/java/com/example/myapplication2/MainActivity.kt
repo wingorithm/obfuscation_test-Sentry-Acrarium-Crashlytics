@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        System.setProperty("https.proxyHost","proxy.intra.bca.co.id")
+        System.setProperty("https.proxyPort","8080")
+        System.setProperty("com.google.api.client.should_use_proxy", "false")
+
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

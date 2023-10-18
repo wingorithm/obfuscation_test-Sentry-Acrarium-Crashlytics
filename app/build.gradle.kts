@@ -1,12 +1,14 @@
 //import io.sentry.android.gradle.extensions.InstrumentationFeature
 //import io.sentry.android.gradle.instrumentation.logcat.LogcatLevel
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     //---- Sentry plugin
-//    id("io.sentry.android.gradle") version "3.12.0"\
+//    id("io.sentry.android.gradle") version "3.12.0"
     //---- Crashlytics plugin
+    id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
 
@@ -34,10 +36,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled= false
+        }
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
+            configure<CrashlyticsExtension> { mappingFileUploadEnabled = true }
         }
     }
     compileOptions {

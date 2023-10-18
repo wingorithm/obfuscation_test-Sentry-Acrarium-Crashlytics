@@ -1,22 +1,16 @@
 package com.example.myapplication2.ui.home
 
-import android.os.Build
+//import io.sentry.Sentry
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication2.databinding.FragmentHomeBinding
-//import io.sentry.Sentry
-import org.acra.ACRA
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.temporal.ChronoUnit
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 
 
 class HomeFragment : Fragment() {
@@ -44,22 +38,27 @@ class HomeFragment : Fragment() {
         }
 
         binding.gocrash.setOnClickListener {
-//            sleep1()
+            sleep1()
 //            throw NullPointerException("hello nulol")
-            stackOverflow2()
+//            stackOverflow2()
 //            Sentry.captureMessage("testing message")
 //            sleep1()
         }
         binding.sendError.setOnClickListener {
 //            send_report()
-            try {
-            throw ConcurrentModificationException("hello nulol")
-            } catch (er: ConcurrentModificationException) {
-//                ACRA.errorReporter.handleException(er)
-//                Sentry.captureException(er)
-                Log.i("ERRORNYA", er.toString(), er)
-            }
-
+//            try {
+//                throw ConcurrentModificationException("hello nulol")
+//            } catch (er: ConcurrentModificationException) {
+////                ACRA.errorReporter.handleException(er)
+////                Sentry.captureException(er)
+//                Firebase.crashlytics.log("TOLONG ADA ERROR")
+//                Log.i("ERRORNYA", er.toString(), er)
+//            }
+            chain2()
+//            val errorlist = arrayListOf<Error>(OutOfMemoryError("OutOfMemory"), ClassCircularityError("ClassCircularity"), IllegalAccessError("IllegalAccess"))
+//            for (er in errorlist){
+//                throw er
+//            }
         }
 
         return root
@@ -77,7 +76,7 @@ class HomeFragment : Fragment() {
 
     private fun sleep1() {
         try {
-            Thread.sleep((8 * 1000).toLong())
+            Thread.sleep((10 * 1000).toLong())
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -91,19 +90,23 @@ class HomeFragment : Fragment() {
 //                throw e
 //            } catch (e: Exception) {
 //                e.printStackTrace()
+//                Firebase.crashlytics.log("TOLONG ADA ERROR")
 //                ACRA.errorReporter.handleException(e)
 //                Sentry.captureException(e)
+//                Firebase.crashlytics.recordException(e)
 //                Log.i("tag", "infokan")
 //            }
-//            for (er in errorlist){
-//                try {
-//                    throw er
-//                } catch (er: Error) {
+//        }
+//        for (er in errorlist){
+//            try {
+//                throw er
+//            } catch (er: Error) {
+//                er.printStackTrace()
+//                Firebase.crashlytics.log(er.toString())
 //                    Sentry.captureException(er)
-//                }
 //            }
 //        }
-//            stackOverflow() //-acra
+    //            stackOverflow() //-acra
 //            throw IllegalArgumentException("IllegalArgument")
 //            throw IndexOutOfBoundsException("IndexOutOfBounds")
 //            throw IllegalStateException("IllegalState")
@@ -132,5 +135,29 @@ class HomeFragment : Fragment() {
 //        AcraActivity().trackBreadcrumb("in Dashboard now")
 //        ACRA.errorReporter.putCustomData("Event at ${System.currentTimeMillis()}", "Send Button Pressed")
     }
+
+    private fun chain(){
+        try {
+            val ex = NumberFormatException("chain1")
+            ex.initCause(NullPointerException("chain2"))
+            throw ex
+        }catch (ex : NumberFormatException){
+            Firebase.crashlytics.recordException(ex)
+            ex.printStackTrace()
+        }
+    }
+    private fun chain2(){
+        try {
+            val numbers = IntArray(5)
+            val divisor = 0
+            for (i in numbers.indices) {
+                val result = numbers[i] / divisor
+                println(result)
+            }
+        } catch (e: ArithmeticException) {
+            throw RuntimeException("Error: division by zero", e)
+        }
+    }
+
 
 }
