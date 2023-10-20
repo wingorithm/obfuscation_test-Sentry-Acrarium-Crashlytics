@@ -11,6 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication2.databinding.FragmentHomeBinding
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.temporal.ChronoUnit
 
 
 class HomeFragment : Fragment() {
@@ -45,7 +48,7 @@ class HomeFragment : Fragment() {
 //            sleep1()
         }
         binding.sendError.setOnClickListener {
-//            send_report()
+            send_report()
 //            try {
 //                throw ConcurrentModificationException("hello nulol")
 //            } catch (er: ConcurrentModificationException) {
@@ -54,7 +57,7 @@ class HomeFragment : Fragment() {
 //                Firebase.crashlytics.log("TOLONG ADA ERROR")
 //                Log.i("ERRORNYA", er.toString(), er)
 //            }
-            chain2()
+//            chain2()
 //            val errorlist = arrayListOf<Error>(OutOfMemoryError("OutOfMemory"), ClassCircularityError("ClassCircularity"), IllegalAccessError("IllegalAccess"))
 //            for (er in errorlist){
 //                throw er
@@ -121,16 +124,17 @@ class HomeFragment : Fragment() {
 
 //    @RequiresApi(Build.VERSION_CODES.O)
     private fun send_report(){
-//        val start1 = LocalTime.now()
-//        while (true) {
-//            try {
-//                throw IllegalAccessError("IllegalAccess")
-//            } catch (er: IllegalAccessError) {
-////                Sentry.captureException(er)
+        val start1 = LocalTime.now()
+        while (true) {
+            try {
+                throw IllegalAccessError("IllegalAccess")
+            } catch (er: IllegalAccessError) {
+                Firebase.crashlytics.recordException(er)
+//                Sentry.captureException(er)
 //                ACRA.errorReporter.handleException(er)
-//            }
-//            if (ChronoUnit.SECONDS.between(start1, LocalDateTime.now()) >= 30) break
-//        }
+            }
+            if (ChronoUnit.SECONDS.between(start1, LocalDateTime.now()) >= 30) break
+        }
 
 //        AcraActivity().trackBreadcrumb("in Dashboard now")
 //        ACRA.errorReporter.putCustomData("Event at ${System.currentTimeMillis()}", "Send Button Pressed")
